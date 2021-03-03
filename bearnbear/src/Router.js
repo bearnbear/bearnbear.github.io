@@ -1,7 +1,7 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './components/Home'
-// import Wallet from './Wallet'
+import Wallet from './components/Wallet'
 // import Explorer from './Explorer'
 // import Trade from './Trade'
 // import Calculator from './Calculator'
@@ -13,9 +13,13 @@ class Router extends React.Component {
   render () {
     return (
       <>
-        <div className='page-container'>
+        <div className=''>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/'>
+              <Redirect to='/home' />
+            </Route>
+            <Route exact path='/home' component={Home} />
+            <Route exact path='/wallet' component={Wallet} />
             {/* <Route exact path='/overview'/>
             <Route exact path='/gallery'/>
             <Route exact path='/nct_token'/>

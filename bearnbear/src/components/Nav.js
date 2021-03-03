@@ -5,7 +5,7 @@ const navItems = [
   {
     name: 'home',
     tag: 'Home',
-    route: '/'
+    route: '/home'
   },
   {
     name: 'overview',
@@ -36,7 +36,7 @@ const renderNavItems = (itemArr) => {
         key={item.route}
         to={item.route}
         className='item'
-        activeClassName='item active'
+        activeClassName='active'
       >
         {item.tag}
       </NavLink>
