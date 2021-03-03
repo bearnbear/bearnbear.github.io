@@ -3,6 +3,11 @@ import config from '../../connector/config'
 import globalConfig from '../../global-config'
 import bearNBear from '../../connector/contracts/BearNBearToken.json'
 import NameChangeToken from '../../connector/contracts/NameChangeToken.json'
+import { BscConnector } from '@binance-chain/bsc-connector'
+export const bsc = new BscConnector({
+  supportedChainIds: [56, 97] // later on 1 ethereum mainnet and 3 ethereum ropsten will be supported
+})
+
 const METAMASK = 'metamask-compatible'
 const logger = {
   log: (msg) => console.log('[ethereum-auth]', msg),
@@ -28,17 +33,22 @@ const initBlockchainEnvironment = async () => {
       const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc.networks[network].bearNBearTokenContractAddress)
       const hash = await bearNBearInstance.methods.IPFS_PROVENANCE().call()
       let accounts = []
-      setTimeout(async () => {
-        console.log('window', window.BinanceChain)
-        const provider = window.BinanceChain
+      const provider = window.BinanceChain
+      const activate = await bsc.activate()
+      const accountsss = await bsc.getAccount()
+      const chainId = await bsc.getChainId()
+      console.log('activate', activate)
+      console.log('accountsss', accountsss)
+      console.log('chainId', chainId)
+      if (provider) {
         accounts = await provider.request({
           method: 'eth_accounts'
         })
-        const balance = await web3.eth.getBalance(accounts[0])
+        const balanceInWei = await web3.eth.getBalance(accounts[0])
+        const balance = await web3.utils.fromWei(balanceInWei, 'ether')
+        blockchain.balance = balance
         if (accounts.length > 0) {
           blockchain.account = accounts[0]
-          const ethBalanceInWei = await web3.eth.getBalance(accounts[0])
-          blockchain.balance = web3.utils.fromWei(ethBalanceInWei, 'ether')
           blockchain.network = network
           const isProd = process.env.REACT_APP_APP_ENV === 'prod'
           if (isProd && blockchain.network !== 'main') {
@@ -56,7 +66,7 @@ const initBlockchainEnvironment = async () => {
           console.log('init blockchain', blockchain)
           return resolve(blockchain)
         }
-      }, 0)
+      }
     } catch (e) {
       console.log('e', e)
       const bearNBearInfraInfo = {
