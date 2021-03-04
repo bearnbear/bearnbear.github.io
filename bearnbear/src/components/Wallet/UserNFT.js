@@ -10,7 +10,7 @@ const UserNFT = () => {
         <button className='btn'>Claim all mBT</button>
         <button className='btn' onClick={() => setShowBuyModal(true)}>Buy BBT</button>
       </div>
-      {showBuyModal && <BuyModal />}
+      {showBuyModal && <BuyModal hideModal={() => setShowBuyModal(false)} />}
     </div>
   )
 }

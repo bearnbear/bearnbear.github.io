@@ -14,22 +14,22 @@ const refreshBlockchainInfraInfo = () => {
   const abiOfVersionNetwork = NETWORKS[blockchain].abi
   const BearNBearContract = require(`${abiOfVersionNetwork.BearNbearToken}`)
   console.log('BearNBearContract',abiOfVersionNetwork)
-  const NameChangeTokenContract = require(`${abiOfVersionNetwork.NameChangeToken}`)
+  const MiniBearTokenContract = require(`${abiOfVersionNetwork.MiniBearToken}`)
   const currentNetworkIsDeployed = NETWORKS[blockchain].networks[network]
   const BEARNBEARTOKEN_ADDR =
     (currentNetworkIsDeployed &&
       NETWORKS[blockchain].networks[network].bearNBearTokenContractAddress) ||
     NETWORKS[blockchain].networks.main.bearNBearTokenContractAddress
-  const NAMECHANGETOKEN_ADDR =
+  const MINIBEARTOKEN_ADDR =
     (currentNetworkIsDeployed &&
-      NETWORKS[blockchain].networks[network].nameChangeTokenContractAddress) ||
-    NETWORKS[blockchain].networks.main.nameChangeTokenContractAddress
+      NETWORKS[blockchain].networks[network].miniBearTokenContractAddress) ||
+    NETWORKS[blockchain].networks.main.miniBearTokenContractAddress
 
   return {
     BearNBearContract,
-    NameChangeTokenContract,
+    MiniBearTokenContract,
     BEARNBEARTOKEN_ADDR,
-    NAMECHANGETOKEN_ADDR,
+    MINIBEARTOKEN_ADDR,
     blockchain,
     network
   }
@@ -49,13 +49,13 @@ const config = {
       }
     }
   },
-  NameChangeToken: (web3) => {
+  MiniBearToken: (web3) => {
     if (!web3) return null
     if (web3.utils) {
-      const { NAMECHANGETOKEN_ADDR, NameChangeTokenContract } = refreshBlockchainInfraInfo()
-      const address = web3.utils.toChecksumAddress(NAMECHANGETOKEN_ADDR)
+      const { MINIBEARTOKEN_ADDR, MiniBearTokenContract } = refreshBlockchainInfraInfo()
+      const address = web3.utils.toChecksumAddress(MINIBEARTOKEN_ADDR)
       if (address) {
-        return new web3.eth.Contract(NameChangeTokenContract.abi, address)
+        return new web3.eth.Contract(MiniBearTokenContract.abi, address)
       } else {
         return { error: true }
       }

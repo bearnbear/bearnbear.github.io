@@ -2,20 +2,24 @@ import React, { useState } from 'react'
 import Modal from '../Global/Modal'
 import { connect } from 'react-redux'
 import { mintNFT } from '../../redux/actions'
-const buyArr = [1,5,10,20]
 
-const renderBuy = (arr, setCurrentAmt, currentAmt) => {
-  return arr.map(value => {
-    return <div className={`buyChoice ${currentAmt === value && 'selected'}`} key={value} onClick={() => setCurrentAmt(value)}>{value}</div>
-  })
+const renderBuy = () => {
+  const renArr = []
+  for (let i = 0; i < 21; i++) {
+    renArr.push(<option key={i} value={i}>{i}</option>)
+  }
+
+  return renArr
 }
-const BuyModal = ({ mintNFT, web3 }) => {
+const BuyModal = ({ mintNFT, web3, hideModal }) => {
   const [currentAmt, setCurrentAmt] = useState(0)
   return (
-    <Modal mode='primary' size='md' modalHeader='Buy NFT'>
-      <div>
-        {renderBuy(buyArr, setCurrentAmt, currentAmt)}
-      </div>
+    <Modal mode='primary' size='md' modalHeader='Buy NFT' hideModal={hideModal} clickToClose pressToClose>
+      <form>
+        <select value={currentAmt} onChange={(e) => setCurrentAmt(e.target.value)}>
+          {renderBuy()}
+        </select>
+      </form>
       <button onClick={() => mintNFT(currentAmt, web3)}>Buy!</button>
     </Modal>
   )

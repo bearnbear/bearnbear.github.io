@@ -3,12 +3,12 @@ const globalConfig = {
     main: {
       rpcEndpoint: 'https://bsc-dataseed.binance.org/',
       bearNBearTokenContractAddress: '',
-      nameChangeTokenContractAddress: ''
+      miniBearTokenContractAddress: ''
     },
     testnet: {
       rpcEndpoint: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-      bearNBearTokenContractAddress: '0x8aF7608E287958Ab85c85c246B4cF54CB861F777',
-      nameChangeTokenContractAddress: '0x1abb04723ff281a45bc6a7aabf5712a740dcacdb'
+      bearNBearTokenContractAddress: '0xe2b9B7Aa971511b081807e388A9ab319d4A63BF3',
+      miniBearTokenContractAddress: '0x92f8Ab2352FffABb5D6B9D32f9f733F909C8Eed2'
     }
   }
 }

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import blockchainReducer from './blockchainReducer'
-
+import homeReducer from './homeReducer'
 export default combineReducers({
-  blockchain: blockchainReducer
+  blockchain: blockchainReducer,
+  home: homeReducer
 })

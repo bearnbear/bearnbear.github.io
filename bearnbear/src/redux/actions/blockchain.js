@@ -1,8 +1,5 @@
 import Web3 from 'web3'
-import config from '../../connector/config'
 import globalConfig from '../../global-config'
-import bearNBear from '../../connector/contracts/BearNBearToken.json'
-import NameChangeToken from '../../connector/contracts/NameChangeToken.json'
 import { BscConnector } from '@binance-chain/bsc-connector'
 export const bsc = new BscConnector({
   supportedChainIds: [56, 97] // later on 1 ethereum mainnet and 3 ethereum ropsten will be supported

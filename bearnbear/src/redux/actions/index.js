@@ -1,5 +1,5 @@
 import blockchain from './blockchain'
-import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET } from '../types'
+import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET, GET_SUPPLY } from '../types'
 import connector from '../../connector'
 
 export const connectWithMetaMask = (b) => async (dispatch) => {
@@ -24,7 +24,18 @@ export const mintNFT = (amount, web3) => dispatch => {
     .catch(err => console.log(err))
 }
 
-
+export const getTotalSupply = (web3) => dispatch => {
+  return connector
+    .totalSupply(web3)
+    .then(supply => {
+      console.log('supply', supply)
+      dispatch({
+        type: GET_SUPPLY,
+        payload: { supply }
+      })
+    })
+    .catch(err => console.log(err))
+}
 
 
 export const initBlockchainEnvironment = () => (dispatch) => {

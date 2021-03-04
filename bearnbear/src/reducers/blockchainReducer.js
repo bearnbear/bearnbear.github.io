@@ -1,4 +1,5 @@
 import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET } from '../redux/types'
+
 const INITIAL_STATE = {
   account: '',
   balance: 0,
@@ -6,7 +7,7 @@ const INITIAL_STATE = {
   web3: null
 }
 
-export default (state = INITIAL_STATE, action) => {
+const blockchainReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case INIT_BLOCKCHAIN_ENVIRONMENT:
       return { ...state, ...action.payload }
@@ -17,3 +18,5 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default blockchainReducer

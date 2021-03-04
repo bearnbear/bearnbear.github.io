@@ -18,8 +18,8 @@ const navItems = [
     route: '/gallery'
   },
   {
-    name: 'NCTToken',
-    tag: 'NCT Token',
+    name: 'mBTToken',
+    tag: 'mBT Token',
     route: '/nct-token'
   },
   {
