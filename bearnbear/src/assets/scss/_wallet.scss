@@ -5,6 +5,32 @@
   align-items: center;
   .logo {
     margin-bottom: 3rem;
-    width: 30vw;
+    width: 150px;
+    &.connected {
+      align-self: flex-end;
+      height: 100px;
+      margin-bottom: 0;
+    }
+  }
+  .outter-container {
+    display: flex;
+    flex-direction: row;
+    .inner-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+}
+
+.buyChoice {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f6f6f6;
+  margin: 5px;
+  cursor: pointer;
+  &.selected {
+    background-color: #e6e6e6;
   }
 }

@@ -26,54 +26,47 @@ const initBlockchainEnvironment = async () => {
         network: '',
         web3: null
       }
-      const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545')
-      if (web3) {
-        blockchain.web3 = web3
+      if (!window.ethereum) {
+        const INFURA_ENDPOINT = globalConfig.bsc[network].rpcEndpoint
+        blockchain.web3 = blockchain.web3 || new Web3(
+          new Web3.providers.HttpProvider(INFURA_ENDPOINT)
+        )
       }
-      const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc.networks[network].bearNBearTokenContractAddress)
-      const hash = await bearNBearInstance.methods.IPFS_PROVENANCE().call()
-      let accounts = []
-      const provider = window.BinanceChain
-      const activate = await bsc.activate()
-      const accountsss = await bsc.getAccount()
-      const chainId = await bsc.getChainId()
-      console.log('activate', activate)
-      console.log('accountsss', accountsss)
-      console.log('chainId', chainId)
-      if (provider) {
-        accounts = await provider.request({
-          method: 'eth_accounts'
-        })
-        const balanceInWei = await web3.eth.getBalance(accounts[0])
-        const balance = await web3.utils.fromWei(balanceInWei, 'ether')
-        blockchain.balance = balance
-        if (accounts.length > 0) {
-          blockchain.account = accounts[0]
-          blockchain.network = network
-          const isProd = process.env.REACT_APP_APP_ENV === 'prod'
-          if (isProd && blockchain.network !== 'main') {
-            return window.alert('You are not on mainnet! Switch back to mainnet!')
-          }
-          const networkToUse = isProd
-            ? process.env.REACT_APP_DEFAULT_NETWORK
-            : blockchain.network || process.env.REACT_APP_DEFAULT_NETWORK
-          const bearNBearInfraInfo = {
-            blockchain: process.env.REACT_APP_BLOCKCHAIN,
-            version: process.env.REACT_APP_CONTRACT_VERSION,
-            network: networkToUse
-          }
-          localStorage.setItem('bearNBearInfraInfo', JSON.stringify(bearNBearInfraInfo))
-          console.log('init blockchain', blockchain)
-          return resolve(blockchain)
+      const provider = window.ethereum
+      const localWeb3 = new Web3(provider)
+      const accounts = await localWeb3.eth.getAccounts()
+      if (accounts.length > 0) {
+        blockchain.account = accounts[0]
+        const ethBalanceInWei = await localWeb3.eth.getBalance(accounts[0])
+        blockchain.balance = localWeb3.utils.fromWei(ethBalanceInWei, 'ether')
+        blockchain.web3 = localWeb3
+        if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
+          blockchain.web3 = localWeb3
+          // Subscribe to accounts change
+          provider.on('accountsChanged', () => refreshBlockchainEnvironment())
+          // Subscribe to chainId change
+          provider.on('chainChanged', () => refreshBlockchainEnvironment())
+          // Subscribe to session connection/open
+          provider.on('open', () => console.log('open'))
+          // Subscribe to session disconnection/close
+          provider.on('close', (code, reason) => {
+            localStorage.removeItem('currentBlockchainWallet')
+            refreshBlockchainEnvironment()
+          })
+        }
+      } else {
+        if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
+          localStorage.removeItem('currentBlockchainWallet')
         }
       }
-    } catch (e) {
-      console.log('e', e)
-      const bearNBearInfraInfo = {
-        blockchain: process.env.REACT_APP_BLOCKCHAIN,
-        network: process.env.REACT_APP_DEFAULT_NETWORK
+      const isProd = process.env.REACT_APP_APP_ENV === 'prod'
+      const chainId = await localWeb3.eth.getChainId()
+      console.log(chainId)
+      if (isProd && chainId !== 56) {
+        return window.alert('You are not on mainnet! Switch back to mainnet!')
       }
-      localStorage.setItem('bearNBearInfraInfo', JSON.stringify(bearNBearInfraInfo))
+      return resolve(blockchain)
+    } catch (e) {
       reject(e)
     }
   })
@@ -89,20 +82,40 @@ const connectWithMetaMask = async (blockchain) => {
   if (!window.ethereum) return window.alert('Metamask wallet is not installed!')
   // prompt user to login metamask
   try {
-    // const provider = new Web3.providers.HttpProvider(globalConfig.eth.networks[network].rpcEndpoint)
-    const provider = window.BinanceChain
+    const provider = window.ethereum
+    console.log('provider', provider)
     const accounts = await provider.request({
-      method: 'eth_accounts'
+      method: 'eth_requestAccounts'
     })
+    const web3 = new Web3(provider)
     console.log('account in connect', accounts)
+    console.log('web3', web3)
+    const blockchain = {
+      account: '',
+      balance: 0,
+      network: '',
+      web3: null
+    }
     const connected = accounts.length > 0
     if (connected) {
       logger.log('connected with METAMASK')
       localStorage.setItem('currentBlockchainWallet', METAMASK)
-      console.log('account', accounts)
-      // update environment
-      // refreshBlockchainEnvironment()
-      return { account: accounts[0] }
+      let currentWalletAddress = localStorage.getItem('currentWalletAddress')
+      if (!currentWalletAddress) {
+        currentWalletAddress = accounts[0]
+        localStorage.setItem('currentWalletAddress', accounts[0])
+      } else if (accounts[0] !== currentWalletAddress) {
+        currentWalletAddress = accounts[0]
+        localStorage.setItem('currentWalletAddress', accounts[0])
+      }
+      blockchain.account = currentWalletAddress
+      const balanceInWei = await web3.eth.getBalance(currentWalletAddress)
+      const balance = await web3.utils.fromWei(balanceInWei, 'ether')
+      blockchain.balance = balance
+      blockchain.network = network
+      blockchain.web3 = web3
+      console.log('blockchain', blockchain)
+      return { blockchain }
     }
   } catch (e) {
     logger.error(e)

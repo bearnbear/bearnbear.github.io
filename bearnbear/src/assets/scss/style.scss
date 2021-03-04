@@ -1,16 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
-@import './font';
-@import './color';
-@import './nav';
-@import './wallet';
 
+$breakpoints: (
+  small: 480px,
+  medium: 850px,
+  large: 1000px,
+  x-large: 1130px,
+);
 
 *, body {
   font-family: 'Open Sans', 'Roboto', sans-serif !important;
   margin: 0;
   padding: 0;
 }
+@import './font';
+@import './color';
+@import './nav';
+@import './wallet';
+@import './modal';
 .site-title {
   font-size:$nav-font-size;
 }

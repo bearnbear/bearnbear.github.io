@@ -11,6 +11,7 @@ export default (state = INITIAL_STATE, action) => {
     case INIT_BLOCKCHAIN_ENVIRONMENT:
       return { ...state, ...action.payload }
     case CONNECT_WALLET:
+      console.log('action', action.payload)
       return { ...state, ...action.payload }
     default:
       return state

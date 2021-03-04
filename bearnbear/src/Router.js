@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './components/Home'
-import Wallet from './components/Wallet'
+import Wallet from './components/Wallet/Wallet'
 // import Explorer from './Explorer'
 // import Trade from './Trade'
 // import Calculator from './Calculator'

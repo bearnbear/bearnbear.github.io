@@ -1,0 +1,118 @@
+
+.dimmer {
+  position: fixed;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  vertical-align: middle;
+  padding: 2em;
+  background-color: rgba(0, 0, 0, 0.85);
+  line-height: 1;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+  transition: background-color 0.5s linear;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  user-select: none;
+  will-change: opacity;
+  z-index: 1000;
+  @media screen and (max-width: map-get($breakpoints, small)) {
+    padding: 2em 0;
+  }
+}
+
+.modal {
+  max-width: 800px;
+  border-radius: 8px;
+  position: relative;
+  text-align: left;
+  user-select: text;
+  &.primary > .title-group {
+    background-color: $main-color;
+    color: white;
+  }
+  &.error > .title-group {
+    background-color: red;
+    color: white;
+  }
+  .title-group {
+    position: absolute;
+    top: -42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    max-height: 42px;
+    height: 42px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 1px -1px 10px rgba(255, 255, 255, 0.5);
+    @media screen and (max-width: map-get($breakpoints, small)) {
+      padding: 20px 0;
+    }
+    .modal-title {
+      font-size: $content-font-size;
+      line-height: $content-font-size;
+    }
+    .close-icon {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+  &.sm {
+    min-width: 445px;
+    @media screen and (max-width: map-get($breakpoints, medium)) {
+      max-width: 90vw;
+      min-width: 345px;
+    }
+    @media screen and (max-width: map-get($breakpoints, small)) {
+      max-width: 90vw;
+      min-height: 30vh;
+      min-width: 86vw;
+    }
+  }
+  &.md {
+    width: 800px;
+    min-width: 33vw;
+    @media screen and (max-width: map-get($breakpoints, small)) {
+      min-height: 30vh;
+      max-width: 90vw;
+      min-width: 80vw;
+    }
+  }
+  .modal-inner-content {
+    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    padding-bottom: 2rem;
+    background-color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    max-height: 70vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar-track {
+      //full track
+      background-color: transparent;
+      border-radius: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      //bar
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: map-get($breakpoints, small)) {
+      height: 100%;
+    }
+  }
+}
