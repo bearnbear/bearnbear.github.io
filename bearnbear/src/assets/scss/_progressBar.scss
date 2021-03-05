@@ -1,0 +1,40 @@
+.progress-bar {
+  margin-top: 100px;
+  width: 100%;
+  background-color: rgb(237, 237, 237);
+  height:20px;
+  border-radius: 10px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  .tier {
+    height:20px;
+    border-right: 5px solid white;
+    z-index: 2;
+    position: relative;
+    .count {
+      position: absolute;
+      top: -3rem;
+      width:100%;
+      text-align: center;
+    }
+    .price {
+      position: absolute;
+      bottom: -3rem;
+      width: 100%;
+      text-align: center;
+    }
+    .progress {
+      background-color:red;
+      height:20px;
+      &.1 {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      &.7 {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
+  }
+}

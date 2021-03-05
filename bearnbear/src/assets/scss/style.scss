@@ -18,12 +18,18 @@ $breakpoints: (
 @import './nav';
 @import './wallet';
 @import './modal';
+@import './card';
+@import './progressBar';
+
 .site-title {
   font-size:$nav-font-size;
 }
 
 .page-container {
   margin: 3rem 10vw;
+  @media screen and (max-width: map-get($breakpoints, medium)) {
+    margin: 3rem 5vw;
+  }
 }
 
 .btn {
@@ -44,4 +50,26 @@ $breakpoints: (
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  &:focus {
+    outline: none;
+  }
+}
+
+.outter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  @media screen and (max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+    align-items: center;
+  }
+  .inner-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.introduction {
+  width: 600px;
+  padding: 2rem;
 }
