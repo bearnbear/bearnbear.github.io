@@ -24,9 +24,22 @@ const connector = {
     })
   },
   totalSupply: async (web3) => {
+    console.log('web3 totalSupply', web3)
     const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
     const totalSupply = await bearNBearInstance.methods.totalSupply().call()
     return totalSupply
+  },
+  getUserBBT: async (userAddress, web3) => {
+    console.log('userAddress', userAddress)
+    const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
+    const userBalance = await bearNBearInstance.methods.balanceOf(userAddress).call()
+    console.log('userBalance', userBalance)
+    const indexArr = []
+    for (let i = 0; i < userBalance; i++) {
+      indexArr.push(await bearNBearInstance.methods.tokenOfOwnerByIndex(userAddress, i).call())
+    }
+    console.log('indexArr', indexArr)
+    return indexArr
   }
 }
 

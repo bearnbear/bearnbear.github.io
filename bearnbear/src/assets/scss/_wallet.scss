@@ -34,3 +34,12 @@
     background-color: #e6e6e6;
   }
 }
+
+.BBT-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .item {
+    margin-right:5px;
+  }
+}
