@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 $breakpoints: (
   small: 480px,
   medium: 850px,
@@ -9,7 +9,7 @@ $breakpoints: (
 );
 
 *, body {
-  font-family: 'Open Sans', 'Roboto', sans-serif !important;
+  font-family: 'Poppins', 'Open Sans', 'Roboto', sans-serif !important;
   margin: 0;
   padding: 0;
 }
@@ -20,6 +20,7 @@ $breakpoints: (
 @import './modal';
 @import './card';
 @import './progressBar';
+@import './home';
 
 .site-title {
   font-size:$nav-font-size;
@@ -30,6 +31,31 @@ $breakpoints: (
   @media screen and (max-width: map-get($breakpoints, medium)) {
     margin: 3rem 5vw;
   }
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}
+
+h2 {
+  margin: 2rem 0 .5rem 0;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing:1px;
+}
+h3 {
+  margin: .2rem 0 1rem 0;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing:1px;
+}
+p {
+  font-size: $content-font-size;
+  line-height: $content-font-size*1.8;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+  letter-spacing:1px;
+  font-weight: 400;
 }
 
 .btn {

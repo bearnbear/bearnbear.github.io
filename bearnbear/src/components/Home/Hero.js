@@ -4,7 +4,7 @@ import { connectWithMetaMask } from '../../redux/actions'
 import { connect } from 'react-redux'
 import Button from '../Global/Button'
 import BuyModal from '../Wallet/BuyModal'
-const Hero = ({ account, connectWithMetaMask }) => {
+const Hero = ({ account, connectWithMetaMask, supply }) => {
   const [showBuyModal, setShowBuyModal] = useState(false)
   return (
     <div className='outter-container'>
@@ -23,6 +23,7 @@ const Hero = ({ account, connectWithMetaMask }) => {
           integer proin. Vitae a nunc commodo eros semper sapien, lacus, odio
           nibh. Vel orci posuere elit in.
         </p>
+        <b>Current Mint Total: {supply}</b>
         {account.length > 0 ? <Button onClick={() => setShowBuyModal(true)}>Buy BBT</Button> : <Button onClick={() => connectWithMetaMask()}>Connect to MetaMask</Button>}
       </div>
       {showBuyModal && <BuyModal hideModal={() => setShowBuyModal(false)} />}
@@ -30,8 +31,8 @@ const Hero = ({ account, connectWithMetaMask }) => {
   )
 }
 
-const mapStateToProps = ({ blockchain }) => {
-  return { account: blockchain.account }
+const mapStateToProps = ({ blockchain, home }) => {
+  return { account: blockchain.account, supply: home.supply }
 }
 
 export default connect(mapStateToProps, { connectWithMetaMask })(Hero)

@@ -1,0 +1,14 @@
+.sample-BBT {
+  display: flex;
+  flex-direction: row;
+  margin-top:100px;
+  img {
+    width: 25%;
+  }
+  @media screen and (max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+    img {
+      width: 100%;
+    }
+  }
+}
