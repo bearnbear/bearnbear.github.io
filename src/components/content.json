@@ -21,9 +21,12 @@
   "mBTToken": {
     "description1": "The mini Bear Token(mBT) is the native token of the BearNBear artwork. The mBT serve 3 differenct purposes: (1) it allows its holder to give their BearNBear a unique name.(2)it allows its holder to give their BearNBear a description. (3) it allows its holder to burn itslef. All the name and description changes is permanently stored and publicly visible on the Binance Blockchain.",
     "description2": "If you own a BearNBear, you can claim the mBTs that are accumulated by the BBT. Each BBT accumulated mBT in differenct speed but overall, you will at least accumulate 3,660 mBTs per year(if your BBT generate at a speed of 10 mBTs per day). If you participate in the initial contribution period, you will receive an additional 4170 mBT on top of the base 4170 mBT that we give for each BBT. To change the name or the description of the BBT, you will need to send 2000 mBTs to the contract and burn them.",
-    "theRules": [
-      "","","","","","",""
+    "theRulesOfNaming": [
+      "No name can be identical","There is a limit of 25 symbols(including spaces)","Uniqueness is case insensitive (i.e. «John» and «john» are considered the same for the blockchain)","There are no leading or trailing «spaces»","Only alphanumerical symbols are eligible for use","Used names become available immediately after the name of the NFT was changed"
     ],
-    "emissionRate": ""
+    "theRulesOfDescription": [
+      "There is a limit of 250 symbols(including spaces)", "There are no leading or trailing «spaces»","Only alphanumerical symbols are eligible for use"
+    ],
+    "emissionRate": "Each year, at least 3,660 mBTs and at most 5856 mBTs will be accumulated by each Hashmask depends on the generating speed. You need 2000 mBTs to change the name of your BearNBear and 2000 mBTs for changing the description. To give more deciding power over early participants, each participant in the first distribution period (30 days) will receive an additional 4170 mBTs on top of the base mBTs of 4170. User can choose to burn 12510 mBT in order to destroy BBT and claim the BNB rewards allocated for the artwork. After 10 years, the emission of new mBTs comes to a halt. From then on, mBTs can only be burnt until one day no mBTs are left and the names of the BearNBear cannot be altered anymore. The artwork is then considered complete."
   }
 }

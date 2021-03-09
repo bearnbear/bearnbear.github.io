@@ -10,8 +10,12 @@ const mBTToken = () => {
         <p>{content.mBTToken.description2}</p>
       </div>
       <div>
-        <h2>The Rules</h2>
-        <ul>{content.mBTToken.theRules.map(r => <li key={r}>{r}</li>)}</ul>
+        <h2>The Naming Rules</h2>
+        <ul>{content.mBTToken.theRulesOfNaming.map(r => <li key={r}>{r}</li>)}</ul>
+      </div>
+      <div>
+        <h2>The Rules for Descriptions</h2>
+        <ul>{content.mBTToken.theRulesOfDescription.map(r => <li key={r}>{r}</li>)}</ul>
       </div>
       <div>
         <h2>Emission Rate of NCTs</h2>
