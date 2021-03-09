@@ -2,6 +2,8 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './components/Home/Home'
 import Wallet from './components/Wallet/Wallet'
+import Gallery from './components/Gallery/Gallery'
+import mBTToken from './components/mBTToken/mBTToken'
 // import Explorer from './Explorer'
 // import Trade from './Trade'
 // import Calculator from './Calculator'
@@ -20,6 +22,8 @@ class Router extends React.Component {
             </Route>
             <Route exact path='/home' component={Home} />
             <Route exact path='/wallet' component={Wallet} />
+            <Route exact path='/gallery' component={Gallery} />
+            <Route exact path='/mbt-token' component={mBTToken} />
             {/* <Route exact path='/overview'/>
             <Route exact path='/gallery'/>
             <Route exact path='/nct_token'/>

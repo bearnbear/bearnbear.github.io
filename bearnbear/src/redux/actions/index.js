@@ -1,5 +1,5 @@
 import blockchain from './blockchain'
-import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET, GET_SUPPLY, GET_USER_BBT } from '../types'
+import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET, GET_SUPPLY, GET_USER_BBT, GET_STARTING_INDEX } from '../types'
 import connector from '../../connector'
 
 export const connectWithMetaMask = (b) => async (dispatch) => {
@@ -67,12 +67,26 @@ export const initBlockchainEnvironment = () => (dispatch) => {
           type: INIT_BLOCKCHAIN_ENVIRONMENT,
           payload: data
         })
+        return data.web3
       })
       .catch((err) => {
         console.error(err)
         reject(err)
       })
   })
+}
+
+export const getStartingIndex = (web3) => dispatch => {
+  console.log('call starting index')
+  return connector
+    .getStartingIndex(web3)
+    .then((data) => {
+      dispatch({
+        type: GET_STARTING_INDEX,
+        payload: { startingIndex: data }
+      })
+    })
+    .catch((err) => console.log(err))
 }
 
 // NOTE: wallet page

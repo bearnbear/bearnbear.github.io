@@ -38,14 +38,18 @@ const connector = {
     const indexArr = []
     for (let i = 0; i < userBalance; i++) {
       indexArr.push(await bearNBearInstance.methods.tokenOfOwnerByIndex(userAddress, i).call())
+      const startingIndex = await bearNBearInstance.methods.startingIndex().call()
+      console.log('startingIndex', startingIndex)
     }
     console.log('indexArr', indexArr)
     return indexArr
+  },
+  getStartingIndex: async (web3) => {
+    const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
+    const startingIndex = await bearNBearInstance.methods.startingIndex().call()
+    console.log('startingIndex', startingIndex)
+    return startingIndex
   }
 }
-
-
-
-
 
 export default connector

@@ -4,6 +4,8 @@ import { connectWithMetaMask } from '../../redux/actions'
 import { connect } from 'react-redux'
 import Button from '../Global/Button'
 import BuyModal from '../Wallet/BuyModal'
+import content from '../content.json'
+
 const Hero = ({ account, connectWithMetaMask, supply }) => {
   const [showBuyModal, setShowBuyModal] = useState(false)
   return (
@@ -12,16 +14,12 @@ const Hero = ({ account, connectWithMetaMask, supply }) => {
       <div className='inner-container introduction'>
         <h2>BearNBear</h2>
         <div>
-          Slogan: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          {content.introduction.slogan}
         </div>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hac
-          adipiscing ut morbi purus eget sed diam interdum. Diam elementum
-          faucibus tortor dictum diam, massa mollis auctor. Mattis consectetur
-          malesuada quisque vel eget cursus risus convallis. Eu suspendisse
-          magna turpis vulputate vitae. Sagittis, scelerisque viverra ultrices
-          integer proin. Vitae a nunc commodo eros semper sapien, lacus, odio
-          nibh. Vel orci posuere elit in.
+          {content.introduction.description1}
+          <br />
+          {content.introduction.description2}
         </p>
         <b>Current Mint Total: {supply}</b>
         {account.length > 0 ? <Button onClick={() => setShowBuyModal(true)}>Buy BBT</Button> : <Button onClick={() => connectWithMetaMask()}>Connect to MetaMask</Button>}

@@ -49,7 +49,7 @@ const ProgressBar = ({ supply }) => {
   useEffect(() => {
     const currentTierIndex = getCurrentTierIndex(supply)
     setCurrentTierIndex(currentTierIndex)
-  })
+  }, [supply])
   return (
     <div className='progress-bar'>
       {renderTier(currentTierIndex, supply)}

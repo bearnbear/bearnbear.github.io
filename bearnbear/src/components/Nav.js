@@ -20,7 +20,7 @@ const navItems = [
   {
     name: 'mBTToken',
     tag: 'mBT Token',
-    route: '/nct-token'
+    route: '/mbt-token'
   },
   {
     name: 'myWallet',

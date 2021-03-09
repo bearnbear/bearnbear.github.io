@@ -1,9 +1,5 @@
 import Web3 from 'web3'
 import globalConfig from '../../global-config'
-import { BscConnector } from '@binance-chain/bsc-connector'
-export const bsc = new BscConnector({
-  supportedChainIds: [56, 97] // later on 1 ethereum mainnet and 3 ethereum ropsten will be supported
-})
 
 const METAMASK = 'metamask-compatible'
 const logger = {
@@ -23,44 +19,46 @@ const initBlockchainEnvironment = async () => {
         network: '',
         web3: null
       }
+      // no window.ethereum so no metamsk
       if (!window.ethereum) {
         const INFURA_ENDPOINT = globalConfig.bsc[network].rpcEndpoint
         blockchain.web3 = blockchain.web3 || new Web3(
           new Web3.providers.HttpProvider(INFURA_ENDPOINT)
         )
-      }
-      const provider = window.ethereum
-      const localWeb3 = new Web3(provider)
-      const accounts = await localWeb3.eth.getAccounts()
-      if (accounts.length > 0) {
-        blockchain.account = accounts[0]
-        const ethBalanceInWei = await localWeb3.eth.getBalance(accounts[0])
-        blockchain.balance = localWeb3.utils.fromWei(ethBalanceInWei, 'ether')
-        blockchain.web3 = localWeb3
-        if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
-          blockchain.web3 = localWeb3
-          // Subscribe to accounts change
-          provider.on('accountsChanged', () => refreshBlockchainEnvironment())
-          // Subscribe to chainId change
-          provider.on('chainChanged', () => refreshBlockchainEnvironment())
-          // Subscribe to session connection/open
-          provider.on('open', () => console.log('open'))
-          // Subscribe to session disconnection/close
-          provider.on('close', (code, reason) => {
-            localStorage.removeItem('currentBlockchainWallet')
-            refreshBlockchainEnvironment()
-          })
-        }
       } else {
-        if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
-          localStorage.removeItem('currentBlockchainWallet')
+        const provider = window.ethereum
+        const localWeb3 = new Web3(provider)
+        const accounts = await localWeb3.eth.getAccounts()
+        if (accounts.length > 0) {
+          blockchain.account = accounts[0]
+          const ethBalanceInWei = await localWeb3.eth.getBalance(accounts[0])
+          blockchain.balance = localWeb3.utils.fromWei(ethBalanceInWei, 'ether')
+          blockchain.web3 = localWeb3
+          if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
+            blockchain.web3 = localWeb3
+            // Subscribe to accounts change
+            provider.on('accountsChanged', () => refreshBlockchainEnvironment())
+            // Subscribe to chainId change
+            provider.on('chainChanged', () => refreshBlockchainEnvironment())
+            // Subscribe to session connection/open
+            provider.on('open', () => console.log('open'))
+            // Subscribe to session disconnection/close
+            provider.on('close', (code, reason) => {
+              localStorage.removeItem('currentBlockchainWallet')
+              refreshBlockchainEnvironment()
+            })
+          }
+        } else {
+          if (localStorage.getItem('currentBlockchainWallet') === METAMASK) {
+            localStorage.removeItem('currentBlockchainWallet')
+          }
         }
-      }
-      const isProd = process.env.REACT_APP_APP_ENV === 'prod'
-      const chainId = await localWeb3.eth.getChainId()
-      console.log(chainId)
-      if (isProd && chainId !== 56) {
-        return window.alert('You are not on mainnet! Switch back to mainnet!')
+        const isProd = process.env.REACT_APP_APP_ENV === 'prod'
+        const chainId = await localWeb3.eth.getChainId()
+        console.log(chainId)
+        if (isProd && chainId !== 56) {
+          return window.alert('You are not on mainnet! Switch back to mainnet!')
+        }
       }
       return resolve(blockchain)
     } catch (e) {
