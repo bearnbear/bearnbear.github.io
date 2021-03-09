@@ -46,10 +46,22 @@ html {
 }
 
 h2 {
+  &::selection {
+    background: white;
+  }
+}
+h1, p, h3 {
+  &::selection {
+    background: $main-color;
+  }
+}
+
+h2 {
   margin: 2rem 0 .5rem 0;
-  font-weight: 400;
-  font-size: 28px;
+  font-weight: 800;
+  font-size: 2rem;
   letter-spacing:1px;
+  color: $main-color;
 }
 h3 {
   margin: .2rem 0 1rem 0;
@@ -64,6 +76,10 @@ p {
   margin-top: 1.5rem;
   letter-spacing:1px;
   font-weight: 400;
+
+  .firstWord {
+    font-size: 2rem;
+  }
 }
 
 .btn {

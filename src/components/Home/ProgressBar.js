@@ -3,20 +3,19 @@ import { getCurrentTierIndex } from '../../utils/functions'
 import { connect } from 'react-redux'
 
 const tierInfo = [
-  { tier: 1, price: 0.1, count: 3600, totalWidth: '18.5%', accCount: 0 },
-  { tier: 2, price: 0.3, count: 3500, totalWidth: '18%', accCount: 3600 },
-  { tier: 3, price: 0.6, count: 3400, totalWidth: '17.5%', accCount: 7100 },
-  { tier: 4, price: 1.2, count: 3300, totalWidth: '17%', accCount: 10500 },
+  { tier: 1, price: 0.1, count: 3600, totalWidth: '17.5%', accCount: 0 },
+  { tier: 2, price: 0.3, count: 3500, totalWidth: '17%', accCount: 3600 },
+  { tier: 3, price: 0.6, count: 3400, totalWidth: '16.5%', accCount: 7100 },
+  { tier: 4, price: 1.2, count: 3300, totalWidth: '16%', accCount: 10500 },
   { tier: 5, price: 2.4, count: 3250, totalWidth: '16.5%', accCount: 13800 },
   { tier: 6, price: 10, count: 100, totalWidth: '8.5%', accCount: 17050 },
-  { tier: 7, price: 100, count: 3, totalWidth: '4%', account: 17151 }
+  { tier: 7, price: 100, count: 3, totalWidth: '8%', account: 17151 }
 ]
 const renderTier = (currentTierIndex, supply) => {
-  console.log('render tier', currentTierIndex)
   return tierInfo.map((tier, i) => {
     if (i < currentTierIndex) {
       return (
-        <div key={tier.price} className={`tier ${tier.tier}`} style={{ width: tier.totalWidth }}>
+        <div key={tier.price} className={`tier tier-${tier.tier}`} style={{ width: tier.totalWidth }}>
           <div className='count'>{tier.count}</div>
           <div className='price'>{tier.price} BNB</div>
           <div className={`progress ${tier.tier}`} style={{ width: '100%' }} />
@@ -24,7 +23,7 @@ const renderTier = (currentTierIndex, supply) => {
       )
     } else if (i > currentTierIndex) {
       return (
-        <div key={tier.price} className={`tier ${tier.tier}`} style={{ width: tier.totalWidth }}>
+        <div key={tier.price} className={`tier tier-${tier.tier}`} style={{ width: tier.totalWidth }}>
           <div className='count'>{tier.count}</div>
           <div className='price'>{tier.price} BNB</div>
           <div className='progress' style={{ width: '0%' }} />
@@ -32,9 +31,8 @@ const renderTier = (currentTierIndex, supply) => {
       )
     } else {
       const percent = (supply - tier.accCount) / tier.count * 100
-      console.log('percent', percent)
       return (
-        <div key={tier.price} className={`tier ${tier.tier}`} style={{ width: tier.totalWidth }}>
+        <div key={tier.price} className={`tier tier-${tier.tier}`} style={{ width: tier.totalWidth }}>
           <div className='count'>{tier.count}</div>
           <div className='price'>{tier.price} BNB</div>
           <div className='progress' style={{ width: `${percent}%` }} />
@@ -52,7 +50,8 @@ const ProgressBar = ({ supply }) => {
   }, [supply])
   return (
     <div className='progress-bar'>
-      {renderTier(currentTierIndex, supply)}
+      {renderTier(3, 11000)}
+      {/*{renderTier(currentTierIndex, supply)}*/}
     </div>
   )
 }

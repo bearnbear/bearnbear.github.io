@@ -6,7 +6,8 @@ import ProgressBar from './ProgressBar'
 import content from '../content.json'
 import Stars from '../stars'
 
-const length = 10
+const length = 17;
+
 
 const Home = ({ getTotalSupply, web3, supply }) => {
   const [startIndex, setStartIndex] = useState(0)
@@ -19,30 +20,37 @@ const Home = ({ getTotalSupply, web3, supply }) => {
   }, [])
 
   const renderGallery = () => {
-    const arr = new Array(12);
+    const arr = Array.from(Array(length).keys());
     return arr.map(i=>{
-      return <div key={i} className='bbt-frame'>
-        <img alt={`example-${i}`} src={require(`./gallery/${i}.png`.default)} />
-      </div>
+      return <img key={i} alt={`example-${i}`} src={require(`./gallery/${(i+startIndex)%length}-preview.png`).default} />
     })
   }
+  // const renderParagraph = (p) => {
+  //   p = p.split(' ');
+  //   const first = p[0];
+  //   const rest = p.slice(1, p.length).join(' ');
+  //   return <span>
+  //     <span className='firstWord'>
+  //       {`${first} `}
+  //     </span>
+  //     <span>
+  //       {rest}
+  //     </span>
+  //   </span>;
+  // }
   return (
     <div className='landing-page'>
       <Hero />
       <Stars />
       <div className='bbt-gallery'>
-        <div className='bbt-gallery-container'>
-          {renderGallery()}
-        </div>
+        {renderGallery()}
       </div>
-      <div className='page-container'>
+      <div className='page-container timeline-container'>
         <ProgressBar />
-        <h2>Co-create the digital collectibles by community</h2>
-        <p>{content.home.BBTConcepts}</p>
-        {/* <div>
-        <h2>The Next Generation of Digital Art Collectibles</h2>
-        <p>{content.home.BBTRules.AboutArt}</p>
-      </div> */}
+        <div>
+          <h2>You decide the life of the bear</h2>
+          <p>{content.home.BBTConcepts}</p>
+        </div>
         <div>
           <h2>How it works</h2>
           {content.home.BBTRules.AboutBBT.map((w, i) => <p key={i}>{w}</p>)}

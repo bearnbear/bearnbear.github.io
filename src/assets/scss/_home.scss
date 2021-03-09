@@ -5,22 +5,47 @@
   text-align: center;
 }
 
-
 .bbt-gallery {
-  width: 100%;
-  overflow: scroll hidden;
-  .bbt-gallery-container {
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 50px 0px;
+  &:hover::-webkit-scrollbar {
+    display: block;
+  }
 
+  &::-webkit-scrollbar {
+    display: none;
+    height: 0px;
+    width: 0px;
   }
-  .bbt-frame {
-    overflow: hidden;
-    height: 495px;
-    width: 351px;
-    margin: 10px auto;
-    border-radius: 30px;
-    img {
-      height: 100%;
-      width: 100%;
-    }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.01);
   }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    cursor: pointer;
+  }
+  img {
+    margin: 10px;
+    width: 230px;
+    //border-radius: 20px;
+  }
+}
+
+.timeline-container {
+
 }
