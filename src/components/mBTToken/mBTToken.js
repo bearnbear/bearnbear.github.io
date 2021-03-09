@@ -8,7 +8,7 @@ const mBTToken = () => {
         <h2>What is mini Bear Token?</h2>
         <p>{content.mBTToken.description1}</p>
         <p>{content.mBTToken.description2}</p>
-        <img src={require('../../assets/images/mBT-contract.svg').default} style={{ width: '100%' }} />
+        <img alt='mBT-contract' src={require('../../assets/images/mBT-contract.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
         <h2>The Rules of Names</h2>
@@ -17,7 +17,6 @@ const mBTToken = () => {
       <div>
         <h2>The Rules for Descriptions</h2>
         <ul>{content.mBTToken.theRulesOfDescription.map(r => <li key={r}>{r}</li>)}</ul>
-        <img src={require('../../assets/images/mBT-Speed.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
         <h2>Emission Rate of NCTs</h2>

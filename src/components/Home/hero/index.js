@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { connectWithMetaMask } from '../../../redux/actions'
 import { connect } from 'react-redux'
-import { useTrail, animated } from 'react-spring'
+import { useTrail } from 'react-spring'
 
 import content from '../../content.json';
 import './style.scss';
