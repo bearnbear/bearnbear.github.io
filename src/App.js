@@ -3,7 +3,6 @@ import Nav from './components/Nav.js'
 import Router from './Router'
 import { connect } from 'react-redux'
 import { initBlockchainEnvironment, getTotalSupply, getStartingIndex } from './redux/actions'
-import Web3 from 'web3'
 class App extends React.Component {
 
   componentDidMount () {
