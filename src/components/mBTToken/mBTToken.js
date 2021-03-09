@@ -18,7 +18,6 @@ const mBTToken = () => {
         <h2>The Rules for Descriptions</h2>
         <ul>{content.mBTToken.theRulesOfDescription.map(r => <li key={r}>{r}</li>)}</ul>
         <h2>The Rules</h2>
-        <ul>{content.mBTToken.theRules.map(r => <li key={r}>{r}</li>)}</ul>
         <img src={require('../../assets/images/mBT-Speed.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
