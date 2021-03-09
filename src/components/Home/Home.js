@@ -32,10 +32,6 @@ const Home = ({ getTotalSupply, web3, supply }) => {
           {renderGallery()}
         </div>
       </div>
-      <div className='bbt-gallery'>
-        <div className='bbt-frame'>
-        </div>
-      </div>
       <div className='page-container'>
         <ProgressBar />
         <h2>Co-create the digital collectibles by community</h2>

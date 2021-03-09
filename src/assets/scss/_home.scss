@@ -5,21 +5,22 @@
   text-align: center;
 }
 
-.big-image {
-}
-.bbt-frame {
-  overflow: hidden;
-  height: 495px;
-  width: 351px;
-  margin: 10px auto;
-  border-radius: 30px;
-  img {
-    height: 100%;
-    width: 100%;
-  }
-}
 
 .bbt-gallery {
   width: 100%;
   overflow: scroll hidden;
+  .bbt-gallery-container {
+
+  }
+  .bbt-frame {
+    overflow: hidden;
+    height: 495px;
+    width: 351px;
+    margin: 10px auto;
+    border-radius: 30px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
