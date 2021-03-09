@@ -4,7 +4,9 @@ import { getTotalSupply } from '../../redux/actions'
 import Hero from './hero'
 import ProgressBar from './ProgressBar'
 import content from '../content.json'
-const length = 10;
+import Stars from '../stars'
+
+const length = 10
 
 const Home = ({ getTotalSupply, web3, supply }) => {
   const [startIndex, setStartIndex] = useState(0)
@@ -27,6 +29,7 @@ const Home = ({ getTotalSupply, web3, supply }) => {
   return (
     <div className='landing-page'>
       <Hero />
+      <Stars />
       <div className='bbt-gallery'>
         <div className='bbt-gallery-container'>
           {renderGallery()}

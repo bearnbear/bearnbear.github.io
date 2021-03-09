@@ -107,3 +107,22 @@ p {
   width: 600px;
   padding: 2rem;
 }
+
+
+
+//Stars
+.stars-group {
+  position: absolute;
+  top: -100px;
+}
+.star {
+ color: $main-color;
+ animation-name: blink;
+ animation-duration: 2s;
+ animation-iteration-count: infinite;
+ height: 50px;
+}
+@keyframes blink {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
