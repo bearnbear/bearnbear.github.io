@@ -8,6 +8,7 @@ const mBTToken = () => {
         <h2>What is mini Bear Token?</h2>
         <p>{content.mBTToken.description1}</p>
         <p>{content.mBTToken.description2}</p>
+        <img src={require('../../assets/images/mBT-Speed.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
         <h2>The Naming Rules</h2>
