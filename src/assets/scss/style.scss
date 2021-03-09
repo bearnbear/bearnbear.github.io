@@ -16,14 +16,19 @@ $breakpoints: (
   padding: 0;
 }
 
-@import './font';
 @import './color';
+@import './font';
 @import './nav';
 @import './wallet';
 @import './modal';
 @import './card';
 @import './progressBar';
 @import './home';
+
+html {
+  background-color: $black;
+  color: white;
+}
 
 .site-title {
   font-size:$nav-font-size;

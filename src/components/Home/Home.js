@@ -1,25 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTotalSupply } from '../../redux/actions'
 import Hero from './hero'
 import ProgressBar from './ProgressBar'
 import content from '../content.json'
+const length = 10;
 
 const Home = ({ getTotalSupply, web3, supply }) => {
+  const [startIndex, setStartIndex] = useState(0)
   useEffect(() => {
     getTotalSupply(web3)
   }, [getTotalSupply, web3])
+  useEffect(()=>{
+    const startIndex = Math.floor(Math.random() * length);
+    setStartIndex(startIndex)
+  }, [])
+
   return (
     <div className='landing-page'>
       <Hero />
+      <div className='bbt-gallery'>
+
+      </div>
+      <div className='bbt-gallery'>
+        <div className='bbt-frame'>
+        </div>
+      </div>
       <div className='page-container'>
         <ProgressBar />
-        <div className='sample-BBT'>
-          <img alt='sample' src={require('../../assets/images/sample1.png').default} />
-          <img alt='sample' src={require('../../assets/images/sample2.png').default} />
-          <img alt='sample' src={require('../../assets/images/sample3.png').default} />
-          <img alt='sample' src={require('../../assets/images/sample4.png').default} />
-        </div>
         <h2>Co-create the digital collectibles by community</h2>
         <p>{content.home.BBTConcepts}</p>
         {/* <div>
