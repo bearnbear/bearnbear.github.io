@@ -16,11 +16,21 @@ const Home = ({ getTotalSupply, web3, supply }) => {
     setStartIndex(startIndex)
   }, [])
 
+  const renderGallery = () => {
+    const arr = new Array(12);
+    return arr.map(i=>{
+      return <div key={i} className='bbt-frame'>
+        <img alt={`example-${i}`} src={require(`./gallery/${i}.png`.default)} />
+      </div>
+    })
+  }
   return (
     <div className='landing-page'>
       <Hero />
       <div className='bbt-gallery'>
-
+        <div className='bbt-gallery-container'>
+          {renderGallery()}
+        </div>
       </div>
       <div className='bbt-gallery'>
         <div className='bbt-frame'>
