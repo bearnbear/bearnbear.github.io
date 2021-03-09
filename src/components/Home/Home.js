@@ -48,7 +48,7 @@ const Home = ({ getTotalSupply, web3, supply }) => {
       <div className='page-container timeline-container'>
         <ProgressBar />
         <div>
-          <h2>You decide the life of the bear</h2>
+          <h2>You own the lifecycle of the BearNBear(BBT)</h2>
           <p>{content.home.BBTConcepts}</p>
         </div>
         <div>
