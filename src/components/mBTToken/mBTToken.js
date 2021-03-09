@@ -11,12 +11,15 @@ const mBTToken = () => {
         <img src={require('../../assets/images/mBT-contract.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
-        <h2>The Naming Rules</h2>
+        <h2>The Rules of Names</h2>
         <ul>{content.mBTToken.theRulesOfNaming.map(r => <li key={r}>{r}</li>)}</ul>
       </div>
       <div>
         <h2>The Rules for Descriptions</h2>
         <ul>{content.mBTToken.theRulesOfDescription.map(r => <li key={r}>{r}</li>)}</ul>
+        <h2>The Rules</h2>
+        <ul>{content.mBTToken.theRules.map(r => <li key={r}>{r}</li>)}</ul>
+        <img src={require('../../assets/images/mBT-Speed.svg').default} style={{ width: '100%' }} />
       </div>
       <div>
         <h2>Emission Rate of NCTs</h2>
