@@ -7,8 +7,8 @@ const globalConfig = {
     },
     testnet: {
       rpcEndpoint: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-      bearNBearTokenContractAddress: '0xe2b9B7Aa971511b081807e388A9ab319d4A63BF3',
-      miniBearTokenContractAddress: '0x92f8Ab2352FffABb5D6B9D32f9f733F909C8Eed2'
+      bearNBearTokenContractAddress: '0xEb9C123a668c4855EBef612c9d85540d15503c57',
+      miniBearTokenContractAddress: '0x0873004b308eb2A3A678a54C9fB18770b185172c'
     }
   }
 }

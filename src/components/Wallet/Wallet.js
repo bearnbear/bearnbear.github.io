@@ -3,6 +3,7 @@ import metamaskLogo from '../../assets/images/metamask-logo.png'
 import { connect } from 'react-redux'
 import { connectWithMetaMask } from '../../redux/actions'
 import UserNFT from './UserNFT'
+import Events from './Events'
 
 class Wallet extends React.Component {
   render () {
@@ -19,6 +20,7 @@ class Wallet extends React.Component {
               </div>
             </div>
             <UserNFT />
+            <Events />
           </>
         ) : (
           <>

@@ -1,9 +1,10 @@
 import globalConfig from '../global-config'
 import bearNBear from './contracts/BearNBearToken.json'
+import miniBear from './contracts/MiniBearToken.json'
 import { calculateTotalPrice } from '../utils/functions'
 const network = process.env.REACT_APP_DEFAULT_NETWORK
 const connector = {
-  mintNFT: async(amount, web3) => {
+  mintBBT: async(amount, web3) => {
     return new Promise(async(resolve, reject) => {
       const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
       const accounts = await web3.eth.getAccounts()
@@ -13,7 +14,7 @@ const connector = {
       const totalPrice = calculateTotalPrice(amount, totalSupply)
       const totalPriceInWei = await web3.utils.toWei(totalPrice.toString(), 'ether')
       return bearNBearInstance.methods
-        .mintNFT(amount)
+        .mintBBT(amount)
         .send({ from: accounts[0], gas: '28500000', value: totalPriceInWei })
         .on('receipt', function (receipt) {
           resolve(receipt)
@@ -31,18 +32,13 @@ const connector = {
     return totalSupply
   },
   getUserBBT: async (userAddress, web3) => {
-    console.log('getUserBBT')
-    console.log('userAddress', userAddress)
-    console.log('web3', web3)
     const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
     const userBalance = await bearNBearInstance.methods.balanceOf(userAddress).call()
-    console.log('userBalance', userBalance)
     const indexArr = []
     for (let i = 0; i < userBalance; i++) {
       indexArr.push(await bearNBearInstance.methods.tokenOfOwnerByIndex(userAddress, i).call())
       const startingIndex = await bearNBearInstance.methods.startingIndex().call()
     }
-    console.log('indexArr', indexArr)
     return indexArr
   },
   getStartingIndex: async (web3) => {
@@ -50,6 +46,53 @@ const connector = {
     const startingIndex = await bearNBearInstance.methods.startingIndex().call()
     console.log('startingIndex', startingIndex)
     return startingIndex
+  },
+  getPastEvent: (web3, account) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log('we3 in getPastEvent', web3)
+        const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
+        const miniBearInstance = new web3.eth.Contract(miniBear.abi, globalConfig.bsc[network].miniBearTokenContractAddress)
+        const accounts = await web3.eth.getAccounts()
+        console.log('accounts', accounts)
+        const filter = {
+          fromBlock: 0,
+          toBlock: 'latest',
+          filter: {}
+        }
+        const history = []
+        if (bearNBearInstance && miniBearInstance) {
+          bearNBearInstance
+            .getPastEvents('Transfer', { ...filter, filter: { from: 0, to: accounts[0] } }, (err, evts) => {
+              const newArr = evts.map(evt => {
+                evt.event = 'Mint BBT'
+                return evt
+              })
+              history.push(...newArr)
+            })
+            .then(() =>
+              bearNBearInstance.getPastEvents('Transfer', { ...filter, filter: {from: accounts[0], to: 0 } }, (err, evts) => history.push(...evts))
+            )
+            .then(() =>
+              bearNBearInstance.getPastEvents('BnbRewards', { ...filter, filter: { user: accounts[0] } }, (err, evts) => history.push(...evts))
+            )
+            .then(() =>
+              miniBearInstance.getPastEvents('Transfer', { ...filter, filter: { from: 0, to: accounts[0] } }, (err, evts) => history.push(...evts))
+            )
+            .then(() =>
+              miniBearInstance.getPastEvents('Transfer', { ...filter, filter: {from: accounts[0], to: 0 } }, (err, evts) => history.push(...evts))
+            )
+            .then(() => {
+              return resolve(history)
+            })
+            .catch(console.error)
+        } else {
+          return resolve([])
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    })
   }
 }
 

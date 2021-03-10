@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Modal from '../Global/Modal'
 import { connect } from 'react-redux'
-import { mintNFT } from '../../redux/actions'
+import { mintBBT } from '../../redux/actions'
 
 const renderBuy = () => {
   const renArr = []
@@ -11,7 +11,7 @@ const renderBuy = () => {
 
   return renArr
 }
-const BuyModal = ({ mintNFT, web3, hideModal }) => {
+const BuyModal = ({ mintBBT, web3, hideModal }) => {
   const [currentAmt, setCurrentAmt] = useState(0)
   return (
     <Modal mode='primary' size='md' modalHeader='Buy NFT' hideModal={hideModal} clickToClose pressToClose>
@@ -20,7 +20,7 @@ const BuyModal = ({ mintNFT, web3, hideModal }) => {
           {renderBuy()}
         </select>
       </form>
-      <button onClick={() => mintNFT(currentAmt, web3)}>Buy!</button>
+      <button onClick={() => mintBBT(currentAmt, web3)}>Buy!</button>
     </Modal>
   )
 }
@@ -29,4 +29,4 @@ const mapStateToProps = ({ blockchain }) => {
   return { web3: blockchain.web3 }
 }
 
-export default connect(mapStateToProps, { mintNFT })(BuyModal)
+export default connect(mapStateToProps, { mintBBT })(BuyModal)

@@ -1,5 +1,5 @@
 import blockchain from './blockchain'
-import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET, GET_SUPPLY, GET_USER_BBT, GET_STARTING_INDEX } from '../types'
+import { INIT_BLOCKCHAIN_ENVIRONMENT, CONNECT_WALLET, GET_SUPPLY, GET_USER_BBT, GET_STARTING_INDEX, GET_EVENTS } from '../types'
 import connector from '../../connector'
 
 export const connectWithMetaMask = (b) => async (dispatch) => {
@@ -14,10 +14,10 @@ export const connectWithMetaMask = (b) => async (dispatch) => {
     .catch(err => console.log(err))
 }
 
-export const mintNFT = (amount, web3) => dispatch => {
-  console.log('in action mintNFT', amount, web3)
+export const mintBBT = (amount, web3) => dispatch => {
+  console.log('in action mintBBT', amount, web3)
   return connector
-    .mintNFT(amount, web3)
+    .mintBBT(amount, web3)
     .then((data) => {
       console.log('combe back', data)
     })
@@ -36,14 +36,6 @@ dispatch => {
       })
     })
     .catch(err => console.log(err))
-}
-
-export const getEvents = () => dispatch => {
-  return blockchain 
-    .getEvents()
-    .then((data) => {
-      console.log(data)
-    })
 }
 
 export const getUserBBT = (userAddress, web3) => dispatch => {
@@ -90,6 +82,20 @@ export const getStartingIndex = (web3) => dispatch => {
     .catch((err) => console.log(err))
 }
 
+export const getPastEvents = (web3) => (dispatch, getState) => {
+  const account = getState(blockchain.account)
+  return connector
+    .getPastEvent(web3, account)
+    .then(data => {
+      console.log('back', data)
+      dispatch({
+        type: GET_EVENTS,
+        payload: { events: data }
+      })
+    })
+    .catch(err => console.log(err))
+}
+
 // NOTE: wallet page
 
 // transfer from -- transfer BBT to other people -> need approve => two steps - OK
@@ -101,6 +107,7 @@ export const getStartingIndex = (web3) => dispatch => {
 // burnt BBT => spend mBT(need apporve) and claim BNB rewards -OK
 
 // getAllWalletEvents - mintBBT, transfer to, transfer from, claim mBT, burn
+// Mint, 
 
 // NOTE: BBT detail page
 
