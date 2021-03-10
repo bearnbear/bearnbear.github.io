@@ -36,6 +36,7 @@ html {
 
 .page-container {
   margin: 10rem 10vw;
+  padding: 10px;
   @media screen and (max-width: map-get($breakpoints, medium)) {
     margin: 10rem 5vw;
   }

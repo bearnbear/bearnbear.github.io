@@ -8,6 +8,7 @@ class Stars extends React.Component {
     count: 0
   }
   componentDidMount () {
+    // it may slow down, we can disable later if we want
     window.addEventListener('resize', this.handleResize)
     this.setState({ height: document.body.scrollHeight}, () => {
       this.setState({ count: this.state.height/50 }, () => {
