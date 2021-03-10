@@ -8,12 +8,20 @@ class Stars extends React.Component {
     count: 0
   }
   componentDidMount () {
-
+    window.addEventListener('resize', this.handleResize)
     this.setState({ height: document.body.scrollHeight}, () => {
       this.setState({ count: this.state.height/50 }, () => {
         this.randomAssign()
       })
     })
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => {
+    this.setState({length: window.innerWidth})
   }
 
   componentDidUpdate(prevProps, prevState) {
