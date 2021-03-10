@@ -1,18 +1,27 @@
 import React from 'react'
 
-const count = document.body.scrollHeight/50
+
 class Stars extends React.Component {
   state = {
     length: window.innerWidth,
-    height: document.body.scrollHeight
+    height: 0,
+    count: 0
   }
   componentDidMount () {
-    this.randomAssign()
+
+    this.setState({ height: document.body.scrollHeight}, () => {
+      this.setState({ count: this.state.height/50 }, () => {
+        this.randomAssign()
+      })
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.length !== prevState.length) {
       this.randomAssign()
+      if (this.state.height !== document.body.scrollHeight) {
+        this.setState({ height: document.body.scrollHeight, count: document.body.scrollHeight/50 })
+      }
     }
   }
 
@@ -20,8 +29,6 @@ class Stars extends React.Component {
     let i
     var star = document.getElementsByClassName('star').length
     var length = this.state.length
-    console.log('star', star)
-    console.log('length', length)
     // we use for loop to assign unique random values for the x position and animation speed
     for (i = 0; i < star; i++) {
       let x = Math.floor(Math.random() * (length))
@@ -33,14 +40,13 @@ class Stars extends React.Component {
 
   renderStarCount = () => {
     const starArr = []
-    for (let i = 0; i < count; i++) {
-      starArr.push(<div className='star'>*</div>)
-    }
-    return starArr
+      for (let i = 0; i < this.state.count; i++) {
+        starArr.push(<div className='star'>*</div>)
+      }
+      return starArr
   }
 
   render () {
-    console.log('height', document.body.scrollHeight)
     return (
       <>
         <div className='stars-group left'>
