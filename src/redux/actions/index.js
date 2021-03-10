@@ -24,11 +24,12 @@ export const mintNFT = (amount, web3) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const getTotalSupply = (web3) => dispatch => {
+export const getTotalSupply = (web3) => 
+dispatch => {
+  console.log('total supply in action', web3)
   return connector
     .totalSupply(web3)
     .then(supply => {
-      console.log('supply', supply)
       dispatch({
         type: GET_SUPPLY,
         payload: { supply }

@@ -25,13 +25,15 @@ const connector = {
     })
   },
   totalSupply: async (web3) => {
-    console.log('web3 totalSupply', web3)
+    console.log('totalSupply', web3)
     const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
     const totalSupply = await bearNBearInstance.methods.totalSupply().call()
     return totalSupply
   },
   getUserBBT: async (userAddress, web3) => {
+    console.log('getUserBBT')
     console.log('userAddress', userAddress)
+    console.log('web3', web3)
     const bearNBearInstance = new web3.eth.Contract(bearNBear.abi, globalConfig.bsc[network].bearNBearTokenContractAddress)
     const userBalance = await bearNBearInstance.methods.balanceOf(userAddress).call()
     console.log('userBalance', userBalance)
@@ -39,7 +41,6 @@ const connector = {
     for (let i = 0; i < userBalance; i++) {
       indexArr.push(await bearNBearInstance.methods.tokenOfOwnerByIndex(userAddress, i).call())
       const startingIndex = await bearNBearInstance.methods.startingIndex().call()
-      console.log('startingIndex', startingIndex)
     }
     console.log('indexArr', indexArr)
     return indexArr

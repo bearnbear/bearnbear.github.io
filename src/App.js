@@ -9,9 +9,9 @@ class App extends React.Component {
   componentDidMount () {
     // init blockchain environment
     this.props.initBlockchainEnvironment()
-      .then((web3) => {
-        this.props.getTotalSupply(web3)
-        this.props.getStartingIndex(web3)
+      .then((res) => {
+        this.props.getTotalSupply(res.web3)
+        this.props.getStartingIndex(res.web3)
       })
   }
 
