@@ -18,7 +18,7 @@ $breakpoints: (
 
 @import './color';
 @import './font';
-@import './nav';
+@import './navbar';
 @import './wallet';
 @import './modal';
 @import './card';
@@ -35,13 +35,13 @@ html {
 }
 
 .page-container {
-  margin: 3rem 10vw;
+  margin: 10rem 10vw;
   @media screen and (max-width: map-get($breakpoints, medium)) {
-    margin: 3rem 5vw;
+    margin: 10rem 5vw;
   }
   @media screen and (min-width: map-get($breakpoints, large)) {
     max-width: 1080px;
-    margin: 5rem auto;
+    margin: 10rem auto;
   }
 }
 
@@ -50,7 +50,7 @@ h2 {
     background: white;
   }
 }
-h1, p, h3 {
+h1, p, h3, div {
   &::selection {
     background: $main-color;
   }

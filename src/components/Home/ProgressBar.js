@@ -50,8 +50,7 @@ const ProgressBar = ({ supply }) => {
   }, [supply])
   return (
     <div className='progress-bar'>
-      {renderTier(3, 11000)}
-      {/*{renderTier(currentTierIndex, supply)}*/}
+      {renderTier(currentTierIndex, supply)}
     </div>
   )
 }

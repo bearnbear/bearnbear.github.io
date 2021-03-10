@@ -1,0 +1,92 @@
+.navbar-fixed-top {
+  position: fixed;
+  width: 100%;
+  background: rgba($black, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 100000;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.navbar-component {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 2px 0px rgba(white, 0.075);
+  .navbar-container {
+    padding: 15px 15px;
+    &:first-child {
+      .myWallet {
+        display: none;
+      }
+    }
+  }
+  .item {
+    user-select: none;
+    text-decoration: none;
+    font-weight: 500;
+    color: rgba(white, 0.6);
+    font-size: $nav-font-size;
+    padding: 8px 12px;
+    border-radius: 30px;
+    margin: 0px 3px;
+    &:hover, &.active, &.site-title {
+      color: rgba(white, 1);
+      transition: .1s opacity ease-in-out;
+    }
+    &:active {
+      transform: scale(1.1);
+    }
+    &.site-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 10px;
+        max-height: 40px;
+      }
+    }
+    &.myWallet {
+      font-size: 0.9rem;
+      box-shadow: 0px 0px 0px 1.5px rgba(white, 0.3);
+      color: rgba(white, 1);
+      margin-right: 10px;
+      padding: 8px 20px;
+      &:hover{
+        color: rgba($main-color, 1);
+      }
+    }
+  }
+  @media screen and (max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    .navbar-container {
+      padding: 10px;
+      .myWallet {
+        display: none;
+      }
+      &:first-child {
+        width: 100%;
+        padding: 10px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .myWallet {
+          display: inline-block;
+        }
+      }
+    }
+    .item {
+      font-size: 1rem;
+      padding: 5px 10px;
+      margin: 0px 1px;
+    }
+  }
+
+}

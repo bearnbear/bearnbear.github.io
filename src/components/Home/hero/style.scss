@@ -15,11 +15,10 @@
   user-select: none;
   cursor: default;
   text-align: center;
-
   .title-container {
     margin: 0px auto;
     text-align: center;
-    padding: 20vh 50px;
+    padding: 25vh 50px;
     max-width: 1000px;
     @media screen and (max-width: map-get($breakpoints, medium)) {
       padding: 35vh 10px;
@@ -36,7 +35,7 @@
         font-size: 5rem;
       }
       @media screen and (max-width: map-get($breakpoints, small)) {
-        font-size: 2rem;
+        font-size: 3rem;
       }
     }
     .sub-title {
@@ -44,7 +43,7 @@
       color: white;
       font-family: 'Kristi', cursive;
       @media screen and (max-width: map-get($breakpoints, medium)) {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
     }
   }

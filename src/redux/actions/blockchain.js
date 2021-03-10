@@ -121,8 +121,10 @@ const disconnectWithMetaMask = () => {
   logger.log('disconnectWithMetaMask')
 }
 
-export default {
+const blockchain = {
   initBlockchainEnvironment,
   connectWithMetaMask,
   disconnectWithMetaMask
 }
+
+export default blockchain
