@@ -25,19 +25,7 @@ const Home = ({ getTotalSupply, web3, supply }) => {
       return <img key={i} alt={`example-${i}`} src={require(`./gallery/${(i+startIndex)%length}-preview.png`).default} />
     })
   }
-  // const renderParagraph = (p) => {
-  //   p = p.split(' ');
-  //   const first = p[0];
-  //   const rest = p.slice(1, p.length).join(' ');
-  //   return <span>
-  //     <span className='firstWord'>
-  //       {`${first} `}
-  //     </span>
-  //     <span>
-  //       {rest}
-  //     </span>
-  //   </span>;
-  // }
+
   return (
     <div className='landing-page'>
       <Hero />
@@ -55,6 +43,11 @@ const Home = ({ getTotalSupply, web3, supply }) => {
           <h2>How it works</h2>
           {content.home.BBTRules.AboutBBT.map((w, i) => <p key={i}>{w}</p>)}
           <img alt='timeline' style={{ width: '100%' }} src={require('../../assets/images/timeline.svg').default} />
+        </div>
+        <div>
+          <h2>Burn 21510 mBT > Burn BBT > reward?</h2>
+          <p>{content.home.BBTRules.Reward}</p>
+          <img alt='timeline' style={{ width: '60%' }} src={require('../../assets/images/decay.svg').default} />
         </div>
         <div>
           <h2>You are part of the Art. The Art is also part of you.</h2>
