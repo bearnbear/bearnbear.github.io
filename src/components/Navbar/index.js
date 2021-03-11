@@ -33,7 +33,7 @@ const Navbar = () => {
           <img alt='logo' src={require('./logo.svg').default}/>
           BearNBear
         </a>
-        <NavLink to='/wallet' className='item myWallet' activeClassName='active'>My Wallet</NavLink>
+        {/* <NavLink to='/wallet' className='item myWallet' activeClassName='active'>My Wallet</NavLink> */}
       </div>
       <div className='navbar-container'>
         {renderNavItems(navItems)}
