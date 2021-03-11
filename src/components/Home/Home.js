@@ -47,7 +47,7 @@ const Home = ({ getTotalSupply, web3, supply }) => {
         <div>
           <h2>Burn 21510 mBT > Burn BBT > reward?</h2>
           <p>{content.home.BBTRules.Reward}</p>
-          <img alt='timeline' style={{ width: '60%' }} src={require('../../assets/images/decay.svg').default} />
+          <img alt='timeline' style={{ width: '100%' }} src={require('../../assets/images/decay.svg').default} />
         </div>
         <div>
           <h2>You are part of the Art. The Art is also part of you.</h2>

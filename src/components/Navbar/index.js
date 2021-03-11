@@ -3,16 +3,6 @@ import { NavLink } from 'react-router-dom'
 
 const navItems = [
   {
-    name: 'overview',
-    tag: 'BearNBear',
-    route: '/overview'
-  },
-  {
-    name: 'gallery',
-    tag: 'Gallery',
-    route: '/gallery'
-  },
-  {
     name: 'mBTToken',
     tag: 'mBT Token',
     route: '/mBT'
@@ -47,7 +37,7 @@ const Navbar = () => {
       </div>
       <div className='navbar-container'>
         {renderNavItems(navItems)}
-        <NavLink to='/wallet' className='item myWallet' activeClassName='active'>My Wallet</NavLink>
+        {/* <NavLink to='/wallet' className='item myWallet' activeClassName='active'>My Wallet</NavLink> */}
       </div>
     </div>
     </div>
