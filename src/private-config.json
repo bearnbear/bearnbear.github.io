@@ -1,0 +1,5 @@
+{
+    "rpcEndpoint": "127.0.0.1:8545",
+    "bearNBearTokenContractAddress": "0x39de5a65109678634f5442CdD00FFDd65293cD61",
+    "miniBearTokenContractAddress": "0xa41D07101fBDe17f3c8cA485dAe12C45Ddb63289"
+}
