@@ -3,6 +3,7 @@ import Router from './Router'
 import Navbar from './components/Navbar'
 import { connect } from 'react-redux'
 import { initBlockchainEnvironment, getTotalSupply, getStartingIndex } from './redux/actions'
+import Footer from './components/Footer'
 class App extends React.Component {
 
   componentDidMount () {
@@ -19,6 +20,7 @@ class App extends React.Component {
       <>
         <Navbar />
         <Router />
+        <Footer />
       </>
     )
   }
